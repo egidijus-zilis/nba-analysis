@@ -3,8 +3,8 @@ import time
 from nba_api.stats.endpoints import LeagueStandings
 from nba_api.stats.endpoints import LeagueDashTeamShotLocations
 
-seasons = ["2011-12", "2012-13", "2013-14", "2014-15", "2015-16",
-           "2021-22", "2022-23", "2023-24", "2024-25", "2025-26"]
+seasons = ["2013-14", "2014-15", "2015-16",
+           "2023-24", "2024-25", "2025-26"]
 all_seasons_standings = []
 all_seasons_shot_percentages = []
 
@@ -43,17 +43,33 @@ for i in range(len(seasons)):
 df_all_seasons_wins = pandas.concat(all_seasons_standings, ignore_index=True)
 df_all_seasons_shot_percentages = pandas.concat(all_seasons_shot_percentages, ignore_index=True)
 
+df_all_seasons_wins = df_all_seasons_wins.rename(columns={
+    "TeamID": "team_id",
+    "Season": "season",
+    "TeamCity": "team_city",
+    "TeamName": "team_name",
+    "WINS": "wins",
+    "LOSSES": "losses",
+})
+
 new_columns = []
 for col in df_all_seasons_shot_percentages.columns:
     if col[1] == "":
-        naujas_vardas = col[0]
+        new_name = col[0]
     elif col[0] == "":
-        naujas_vardas = col[1]
+        new_name = col[1]
     else:
-        naujas_vardas = col[0] + "_" + col[1]
-    new_columns.append(naujas_vardas)
+        new_name = col[0] + "_" + col[1]
+    new_columns.append(new_name)
+
 df_all_seasons_shot_percentages.columns = new_columns
 df_all_seasons_shot_percentages.columns = [col.replace(" ", "") for col in df_all_seasons_shot_percentages.columns]
+
+df_all_seasons_shot_percentages = df_all_seasons_shot_percentages.rename(columns={
+    "Season": "season",
+    "TEAM_ID": "team_id",
+    "TEAM_NAME": "team_name",
+})
 
 df_all_seasons_wins.to_csv("data/wins.csv", index=False)
 df_all_seasons_shot_percentages.to_csv("data/shot_percentages.csv", index=False)
