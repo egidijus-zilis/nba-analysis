@@ -45,3 +45,15 @@ This table's data was found using era_comparison_3pt_stats.sql:
 | Corr(3PA share, Wins)         |        0.33         |        0.09         |
 
 It is clear that 3-point shot selection has taken over the NBA compared to the old era. On average, teams attempt 62.1% more 3-pointers than they used to. The standard deviation of 3-point attempts also dropped by 12.8%, meaning teams have more or less all embraced the 3-point shot. In the old era, high 3-point attempt volume had a relation to wins, but nowadays a high number of 3-point attempts doesn't decide the outcome of the game the way it used to - it's more about how accurate you are. The efficiency of made 3-point shots only increased by 0.7pp. As expected, the relation between made 3-pointers and wins was already high in the old era and increased slightly more in the new era. In the old era, a 3-point shot was about every 4 shots taken, and nowadays it's more than 2 out of 5 shots.
+
+This scatter plot shows 3-point attempts vs wins for both eras, with a trend line for each. In the old era, teams that shot more 3-pointers tended to win more - the line goes up pretty clearly. In the new era, the line is much flatter, so shooting more threes doesn't really separate winners from losers anymore.
+
+![3-Point Attempts vs Wins by Era](images/3pt_attempts_vs_wins.png)
+
+## Limitations
+
+Correlation does not imply causation - a strong relationship between a metric and wins doesn't mean that metric is what's driving the wins. The dataset is also fairly small, covering only 180 team-seasons (30 teams x 6 seasons), so results could shift with a larger sample or different seasons.
+
+## Future Work
+
+To be decided...
