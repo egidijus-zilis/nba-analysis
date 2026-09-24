@@ -54,6 +54,14 @@ This scatter plot shows 3-point attempts vs wins for both eras, with a trend lin
 
 Correlation does not imply causation - a strong relationship between a metric and wins doesn't mean that metric is what's driving the wins. The dataset is also fairly small, covering only 180 team-seasons (30 teams x 6 seasons), so results could shift with a larger sample or different seasons.
 
+
+## Analysis 2: Shot Zone Breakdown (In Progress)
+
+- Does Restricted Area shooting (volume/efficiency) correlate with wins more strongly than 3-point shooting?
+- How did Mid-Range's share of total shots change, and does that decline correlate with wins?
+- Do RA + Corner 3 attempts correlate with wins better than total 3-point attempts?
+
 ## Future Work
 
-To be decided...
+- Compare the shot selection of top-10 and bottom-10 teams within each era, to see what the best teams are actually doing differently, not just how metrics correlate overall.
+- Look at how shot selection changes quarter by quarter, and whether it shifts depending on the score (e.g. do teams shoot more 3s when they're trailing late in the game).
