@@ -19,6 +19,12 @@ Specifically, 2011-2012 and 2019-2020 seasons were avoided due to the lockout an
 
 ## Analysis 1: 3-Point Volume vs Efficiency
 
+**Questions:**
+- Does 3-point attempt volume correlate with wins, and how did this change between eras?
+- Does 3-point shooting efficiency correlate with wins, and how did this change between eras?
+- What share of total shots are 3-pointers, and how does that share correlate with wins?
+- Corner 3 vs Above the Break 3 - which type has a stronger correlation with wins?
+
 ### Methodology
 
 3-point shots come in two zones: Corner 3 and Above the Break 3. Volume was calculated by adding attempted shots from both zones. Efficiency was calculated by adding made shots from both zones and dividing by total attempted shots.
@@ -46,9 +52,28 @@ This table's data was found using era_comparison_3pt_stats.sql:
 
 It is clear that 3-point shot selection has taken over the NBA compared to the old era. On average, teams attempt 62.1% more 3-pointers than they used to. The standard deviation of 3-point attempts also dropped by 12.8%, meaning teams have more or less all embraced the 3-point shot. In the old era, high 3-point attempt volume had a relation to wins, but nowadays a high number of 3-point attempts doesn't decide the outcome of the game the way it used to - it's more about how accurate you are. The efficiency of made 3-point shots only increased by 0.7pp. As expected, the relation between made 3-pointers and wins was already high in the old era and increased slightly more in the new era. In the old era, a 3-point shot was about every 4 shots taken, and nowadays it's more than 2 out of 5 shots.
 
+![3-Point Attempts vs Wins by Era](images/3pt_attempts_vs_wins.png)
+
 This scatter plot shows 3-point attempts vs wins for both eras, with a trend line for each. In the old era, teams that shot more 3-pointers tended to win more - the line goes up pretty clearly. In the new era, the line is much flatter, so shooting more threes doesn't really separate winners from losers anymore.
 
-![3-Point Attempts vs Wins by Era](images/3pt_attempts_vs_wins.png)
+### Corner 3 vs Above the Break 3
+
+Corner 3 (~6.71 meters from the basket) shots are generally considered more efficient since they're a shorter shot, so the expectation was that they'd have a stronger relationship with wins than Above the Break 3 (~7.24 meters from the basket).
+
+This table's data was found using corner3_vs_atb3_corr_wins.sql:
+
+| Metric | Old Era (2013-16) | New Era (2023-26) |
+|---|:---:|:---:|
+| Avg. Corner3 % | 38.3% | 38.8% |
+| Avg. AtB3 % | 34.7% | 35.4% |
+| Corr(Corner3 %, Wins) | 0.4571 | 0.4023 |
+| Corr(AtB3 %, Wins) | 0.5017 | 0.6424 |
+
+Corner 3 is more efficient on average, but Above the Break 3 has the stronger correlation with wins in both eras, and that gap grew wider in the new era. To make sure this wasn't just a couple of outlier teams distorting the numbers, I plotted both relationships directly:
+
+![Corner 3 vs Above the Break 3: Shooting % and Wins](images/corner3_pct_vs_atb3_pct_corr_wins.png)
+
+The scatter plots confirm this isn't caused by a couple of extreme teams - the points are spread evenly across the whole range, with nothing sitting far off on its own. Above the Break 3 points cluster more tightly around their trend line overall, while Corner 3 points are more spread out (similar shooting percentages can lead to very different win totals). The underlying reason for that difference isn't clear from this data alone.
 
 ## Limitations
 
