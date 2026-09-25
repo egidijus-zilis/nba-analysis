@@ -80,11 +80,12 @@ The scatter plots confirm this isn't caused by a couple of extreme teams - the p
 **Questions:**
 - Does Restricted Area shooting (volume/efficiency) correlate with wins more strongly than 3-point shooting?
 - How did Mid-Range's share of total shots change, and does a team's Mid-Range share correlate with wins?
-- Do RA + Corner 3 attempts correlate with wins better than total 3-point attempts?
 
 ### Methodology
 
 Restricted Area shooting is measured directly from the `RestrictedArea_FGA` (volume) and `RestrictedArea_FG_PCT` (efficiency) columns, with no combining of zones needed. Correlation with wins is calculated the same way as in Analysis 1 - Pearson correlation, separately for each era.
+
+Mid-Range share is calculated as `Mid-Range_FGA` divided by total field goal attempts across all zones (`RestrictedArea_FGA` + `InThePaint(Non-RA)_FGA` + `Mid-Range_FGA` + `Corner3_FGA` + `AbovetheBreak3_FGA`). Correlation with wins is calculated the same way as in Analysis 1 - Pearson correlation, separately for each era.
 
 ### Restricted Area vs 3-Point Shooting
 
@@ -119,8 +120,6 @@ This table's data was found using "mid_range_share_corr_wins.sql":
 | Corr(Mid-Range share, Wins) | -0.143 | 0.098 |
 
 We can see that the modern NBA has drastically moved away from Mid-Range shot selection (25.9% -> 10.4%). In the old era, teams with a smaller Mid-Range share tended to win slightly more, but in the new era that flips - teams with a bigger Mid-Range share win slightly more instead. Both correlations are weak, so it's hard to draw a firm conclusion.
-
-### RA + Corner 3 vs Total 3-Point Attempts
 
 ## Limitations
 
