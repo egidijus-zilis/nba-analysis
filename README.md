@@ -11,7 +11,7 @@ Data is taken from stats.nba.com using nba_api.
 Two datasets were pulled from nba_api:
 
 - 'LeagueStandings' - providing wins, losses per team per season.
-- 'LeagueDashTeamShotLocations' - providing field goals made/attempted by shot zone(Restricted Area, Paint, Mid-Range, Corner 3, Above the Break 3)
+- 'LeagueDashTeamShotLocations' - providing field goals made/attempted by shot zone (Restricted Area, Paint, Mid-Range, Corner 3, Above the Break 3)
 
 Data was taken from 2013-16 and 2023-26 seasons.
 
@@ -75,16 +75,43 @@ Corner 3 is more efficient on average, but Above the Break 3 has the stronger co
 
 The scatter plots confirm this isn't caused by a couple of extreme teams - the points are spread evenly across the whole range. Above the Break 3 points cluster more tightly around their trend line overall, while Corner 3 points are more spread out (similar shooting percentages can lead to very different win totals). The underlying reason for that difference isn't clear from this data alone.
 
-## Limitations
-
-Correlation does not imply causation - a strong relationship between a metric and wins doesn't mean that metric is what's driving the wins. The dataset is also fairly small, covering only 180 team-seasons (30 teams x 6 seasons), so results could shift with a larger sample or different seasons.
-
-
 ## Analysis 2: Shot Zone Breakdown (In Progress)
 
+**Questions:**
 - Does Restricted Area shooting (volume/efficiency) correlate with wins more strongly than 3-point shooting?
 - How did Mid-Range's share of total shots change, and does that decline correlate with wins?
 - Do RA + Corner 3 attempts correlate with wins better than total 3-point attempts?
+
+### Methodology
+
+Restricted Area shooting is measured directly from the `RestrictedArea_FGA` (volume) and `RestrictedArea_FG_PCT` (efficiency) columns, with no combining of zones needed. Correlation with wins is calculated the same way as in Analysis 1 - Pearson correlation, separately for each era.
+
+### Restricted Area vs 3-Point Shooting
+
+This table's data was found using restricted_area_corr_wins.sql:
+
+| Metric | Old Era (2013-16) | New Era (2023-26) |
+|---|:---:|:---:|
+| Avg. RA attempts | 2,218 | 2,090 |
+| Avg. 3PA* | 1,843 | 2,987 |
+| Corr(RA attempts, Wins) | -0.169 | -0.041 |
+| Corr(3PA, Wins)* | 0.32 | 0.09 |
+| Avg. RA % | 60.5% | 66.7% |
+| Avg. 3P%* | 35.6% | 36.3% |
+| Corr(RA %, Wins) | 0.533 | 0.386 |
+| Corr(3P%, Wins)* | 0.60 | 0.64 |
+
+*from Analysis 1
+
+The results are not as expected. Restricted Area (the arc area under the basket) shot volume has a negative correlation with wins - even though the relationship is weak, it suggests that shooting more from the Restricted Area is linked to slightly worse outcomes. This is the opposite of what we saw with 3-point volume. Teams also shot more Restricted Area attempts in the old era (2,218 on average) than in the new era (2,090).
+
+Looking at efficiency, Restricted Area shooting percentage has a much stronger, positive correlation with wins. That correlation was stronger in the old era (0.533) than in the new era (0.386), even though average efficiency itself was slightly higher in the new era (66.7% vs 60.5%).
+
+Overall, Restricted Area efficiency correlates with wins, but not as strongly as 3-point efficiency (0.60 old era, 0.64 new era) - so 3-point shooting remains the stronger predictor of wins between the two.
+
+## Limitations
+
+Correlation does not imply causation - a strong relationship between a metric and wins doesn't mean that metric is what's driving the wins. The dataset is also fairly small, covering only 180 team-seasons (30 teams x 6 seasons), so results could shift with a larger sample or different seasons.
 
 ## Future Work
 
